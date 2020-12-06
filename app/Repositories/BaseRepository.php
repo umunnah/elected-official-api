@@ -6,7 +6,6 @@ namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 abstract  class BaseRepository implements BaseRepositoryInterface
 {
@@ -18,16 +17,11 @@ abstract  class BaseRepository implements BaseRepositoryInterface
      * @var Model
      */
     protected $model;
-    /**
-     * @var DB
-     */
-    protected $db;
 
     public function __construct(Model $model, Request $request)
     {
         $this->model = $model;
         $this->request =$request;
-        $this->db = new DB();
 
     }
 
