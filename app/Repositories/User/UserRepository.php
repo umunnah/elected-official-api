@@ -3,7 +3,6 @@
 
 namespace App\Repositories\User;
 
-
 use App\Models\User;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
@@ -20,5 +19,16 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         parent::__construct($model, $request);
     }
+
+    public function all()
+    {
+        $perPage = ($this->request->query('paginate')) ? $this->request->query('paginate'): 100;
+
+        $data = DB::table('users')->latest()->paginate($perPage);
+
+        return $data;
+
+    }
+
 
 }
