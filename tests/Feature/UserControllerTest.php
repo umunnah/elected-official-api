@@ -9,6 +9,7 @@ use Tests\TestCase;
 class UserControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
+
     /**
      * @test
      * A basic feature test example.
@@ -18,7 +19,7 @@ class UserControllerTest extends TestCase
     public function create_a_new_user()
     {
         $this->withoutExceptionHandling();
-        $response = $this->post('/api/v1/register',$this->userData());
+        $response = $this->post('/api/v1/register', $this->userData());
 
         $response->assertOk();
     }

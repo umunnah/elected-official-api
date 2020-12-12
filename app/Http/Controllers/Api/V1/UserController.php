@@ -19,6 +19,11 @@ class UserController extends Controller
         $this->userRepository = $userRepository;
     }
 
+    public function index()
+    {
+        return response()->json($this->userRepository->all(),'200');
+    }
+
     public function store()
     {
         return '';
