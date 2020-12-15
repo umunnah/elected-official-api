@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -16,9 +17,38 @@ class UserControllerTest extends TestCase
      *
      * @return void
      */
+    public function fetch_all_users()
+    {
+        User::factory(100)->create();
+
+        $response = $this->get('/api/v1/users?paginate=50');
+
+        $response->assertOk();
+    }
+
+    /**
+     * @test
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function fetch_user()
+    {
+        $user = User::factory()->create();
+        $response = $this->get('/api/v1/users/'.$user->id);
+
+        $response->assertOk();
+    }
+
+    /**
+     * @test
+     * A basic feature test example.
+     *
+     * @return void
+     */
     public function create_a_new_user()
     {
-        $this->withoutExceptionHandling();
+
         $response = $this->post('/api/v1/register', $this->userData());
 
         $response->assertOk();
