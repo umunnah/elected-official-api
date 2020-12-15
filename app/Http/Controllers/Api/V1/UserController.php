@@ -28,4 +28,10 @@ class UserController extends Controller
     {
         return '';
     }
+
+    public function show($id)
+    {
+        $user =  $this->userRepository->find($id);
+        return response()->json($user,200);
+    }
 }
