@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Http\Response\ApiResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -32,6 +34,20 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        //
+        $this->reportable(function (Throwable $e) {
+        });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if($exception instanceof \Exception){
+            $message = ($exception->getMessage()) ? $exception->getMessage(): $exception;
+            $code = ($exception->getCode() > 504 || $exception->getCode() < 200) ? 404: $exception->getCode();
+            return ApiResponse::sendResponse([], $message, false,
+                $code);
+        } else {
+            $message = ($exception->getMessage()) ? $exception->getMessage(): $exception;
+            return ApiResponse::sendResponse([], $message, false,400);
+        }
     }
 }
