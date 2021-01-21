@@ -22,7 +22,9 @@ class StoreUserRequest extends FormRequest
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'username' => 'required|string|unique:users',
-            'email' => 'required|email|unique:users'
+            'email' => 'required|email|unique:users',
+            'phone' => 'required',
+            'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
         ];
     }
 }
