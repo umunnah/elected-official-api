@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Request\User\StoreUserRequest;
+use App\Http\Response\ApiResponse;
 use App\Repositories\User\UserRepository;
 
 class UserController extends Controller
@@ -24,9 +26,10 @@ class UserController extends Controller
         return response()->json($this->userRepository->all(),'200');
     }
 
-    public function store()
+    public function store(StoreUserRequest $request)
     {
-        return '';
+        $user =  $this->userRepository->create($request->all());
+        return ApiResponse::sendResponse($user, trans('successful'),true, 201);
     }
 
     public function show($id)

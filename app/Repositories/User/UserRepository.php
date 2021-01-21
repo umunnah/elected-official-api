@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -14,6 +15,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function __construct(User $model, Request $request)
     {
         parent::__construct($model, $request);
+        $this->model->creating(function($model){
+            $model->id = Str::uuid();
+        });
     }
 
     public function all()
