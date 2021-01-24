@@ -1,4 +1,4 @@
-name: Laravel
+name: Elected-official-Api
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  laravel-tests:
+  elected-official-api-tests:
 
     runs-on: ubuntu-latest
 
