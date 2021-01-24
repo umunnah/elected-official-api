@@ -50,7 +50,6 @@ class UserControllerTest extends TestCase
     public function create_a_new_user()
     {
         $response = $this->post('/api/v1/register', $this->userData());
-        dd($response->getContent());
         $response->assertCreated();
     }
 
