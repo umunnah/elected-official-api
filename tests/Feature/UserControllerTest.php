@@ -74,7 +74,7 @@ class UserControllerTest extends TestCase
             'username' => $this->faker->userName,
             'email' => $this->faker->email,
             'phone' => $this->faker->phoneNumber,
-            'password' => $this->faker->password(8,20),
+            'password' => 'deS#ert10',
         ];
     }
 }
