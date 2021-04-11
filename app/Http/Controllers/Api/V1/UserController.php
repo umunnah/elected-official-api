@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Request\User\StoreUserRequest;
 use App\Http\Response\ApiResponse;
 use App\Repositories\User\UserRepository;
 
@@ -20,21 +19,22 @@ class UserController extends Controller
     {
         $this->userRepository = $userRepository;
     }
-
-    public function index()
+    
+    /**
+     * get all users with pagination
+     */
+    public function index(): ApiResponse
     {
-        return response()->json($this->userRepository->all(),'200');
+        return ApiResponse::sendResponse($this->userRepository->all(), trans('successful'));
     }
 
-    public function store(StoreUserRequest $request)
-    {
-        $user =  $this->userRepository->create($request->all());
-        return ApiResponse::sendResponse($user, trans('successful'),true, 201);
-    }
 
-    public function show($id)
+    /**
+     * To get a single User
+     */
+    public function show($id): ApiResponse
     {
         $user =  $this->userRepository->find($id);
-        return response()->json($user,200);
+        return ApiResponse::sendResponse($user, trans('successful'));
     }
 }
