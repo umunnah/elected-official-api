@@ -15,9 +15,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function __construct(User $model, Request $request)
     {
         parent::__construct($model, $request);
-        $this->model->creating(function($model){
-            $model->id = Str::uuid();
-        });
+        
     }
 
     public function all()
