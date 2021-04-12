@@ -4,8 +4,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 
-use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use App\Http\Response\ApiResponse;
+use App\Http\Controllers\Controller;
 use App\Repositories\User\UserRepository;
 
 class UserController extends Controller
@@ -23,7 +24,7 @@ class UserController extends Controller
     /**
      * get all users with pagination
      */
-    public function index(): ApiResponse
+    public function index(): JsonResponse
     {
         return ApiResponse::sendResponse($this->userRepository->all(), trans('successful'));
     }
@@ -32,7 +33,7 @@ class UserController extends Controller
     /**
      * To get a single User
      */
-    public function show($id): ApiResponse
+    public function show($id): JsonResponse
     {
         $user =  $this->userRepository->find($id);
         return ApiResponse::sendResponse($user, trans('successful'));
