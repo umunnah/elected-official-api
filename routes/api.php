@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
 
-    Route::post('/register', [UserController::class, 'store']);
+    Route::post('/register', [AuthController::class, 'store']);
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{id}', [UserController::class, 'show']);
 });
